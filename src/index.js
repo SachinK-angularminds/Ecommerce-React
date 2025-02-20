@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { persistor, store } from "./store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+    <GoogleOAuthProvider clientId="913971445307-2j2t8nnv3b0dev03osja3mnltlknn3nm.apps.googleusercontent.com">
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </GoogleOAuthProvider>
+    </PersistGate>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
