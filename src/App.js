@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Users from "./users/Users";
 import { ProtectedRoute } from "./ProtectedRoutes";
 import { useTokenData } from "./customHooks/useTokenData";
+import RedirectHandler from "./auth/login/RedirectHandler";
 
 function App() {
   const users = [
@@ -13,7 +14,7 @@ function App() {
   ];
 
   // credential
-  let tokenStatus=useTokenData();
+  let tokenStatus = useTokenData();
   return (
     <>
       <Routes>
@@ -21,10 +22,14 @@ function App() {
         <Route
           path="/"
           element={
-            tokenStatus ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+            tokenStatus ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
-
+        <Route path="/dash" element={<RedirectHandler />} />
         {/* public routes pages */}
 
         <Route
