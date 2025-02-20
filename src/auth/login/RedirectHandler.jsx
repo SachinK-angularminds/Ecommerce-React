@@ -38,7 +38,7 @@ debugger
             code: authCode,
             redirect_uri: "http://localhost:3000/dash", // Make sure this matches your registered redirect URI
             client_id: "a7b340dd-4bf4-49e1-869d-d7ce69bf97d9", // Your client ID
-            client_secret: "8sesnssicp", // Your client secret
+            client_secret: "muaoe5k60o", // Your client secret
           }),
         }
       );
