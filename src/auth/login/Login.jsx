@@ -93,9 +93,9 @@ const Login = () => {
   return (
     <div className="login-page">
       {/* Upstox Login Button */}
-      {/* <div>
+      <div>
         <button onClick={handleUpstoxLogin}>Login with Upstox</button>
-      </div> */}
+      </div>
 
       <div className="font-sans mt-5 flex items-center justify-center px-4">
         <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-md rounded-md">
