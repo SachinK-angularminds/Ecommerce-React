@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAuthData } from "../../redux/authSlice"; // Assuming you are storing auth data in redux
-import { GoogleLogin } from "@react-oauth/google"; // Google Login component
-import { useNavigate } from "react-router-dom"; // For navigation
+import { setAuthData } from "../../redux/authSlice"; 
+import { GoogleLogin } from "@react-oauth/google"; 
+import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { emailValidation, passwordValidation } from "../../utils/utils";
 import { postApi } from "../../api/api";

@@ -1,12 +1,13 @@
 import "./App.css";
 import Dashboard from "./dashboard/Dashboard.jsx";
 import Login from "./auth/login/Login.jsx";
-import { Navigate, Route, Routes } from "react-router-dom";
 import Users from "./users/Users.jsx";
 import { ProtectedRoute } from "./ProtectedRoutes.jsx";
 import { useTokenData } from "./customHooks/useTokenData.js";
 import RedirectHandler from "./auth/login/RedirectHandler.jsx";
 import Navbar from "./common/Navbar.jsx";
+import Pagination from "./common/Pagination.jsx";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
   const users = [
