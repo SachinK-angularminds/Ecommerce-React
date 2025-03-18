@@ -59,7 +59,5 @@
     },
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
-    },
-    "testEnvironment": "jsdom"
-  }
+    }  }
 }
