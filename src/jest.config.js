@@ -4,7 +4,8 @@ module.exports = {
       '^.+\\.jsx?$': 'babel-jest', // Ensure babel-jest is transforming JSX files
     },
     moduleNameMapper: {
-      '^react-router-dom$': require.resolve('react-router-dom'), // Ensure jest resolves the module correctly
+      '\\.css$': 'identity-obj-proxy', // Mock CSS imports
+      '^react-router-dom$': require.resolve('react-router-dom'), // Resolving react-router-dom
     },
   };
   
