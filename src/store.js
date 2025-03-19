@@ -20,7 +20,11 @@ const persistConfig = {
 
   export const store = configureStore({
     reducer: persistedReducer,
-    middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(postDataApi.middleware)
+    middleware:(getDefaultMiddleware)=>getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST'], // Ignore the persist action
+      },
+    }).concat(postDataApi.middleware)
 
   });
   export const persistor = persistStore(store);
