@@ -26,8 +26,6 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({});
 
-  
-
   // Handle Google Login success
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log("Google login success:", credentialResponse);
@@ -116,12 +114,13 @@ const Login = () => {
                 </p>
               </div>
               <div>
-                <label className="text-gray-800 text-xs block mb-2">
+                <label htmlFor="email" className="text-gray-800 text-xs block mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   name="email"
+                  id="email"
                   value={loginObj?.email}
                   onChange={(e) => handleLoginObj("email", e.target.value)}
                   
@@ -133,13 +132,14 @@ const Login = () => {
                 <p>{errors?.emailMessage}</p>
               </div>
               <div className="mt-8">
-                <label className="text-gray-800 text-xs block mb-2">
+                <label htmlFor="password" className="text-gray-800 text-xs block mb-2">
                   Password
                 </label>
                 <input
                   type="password"
                   value={loginObj?.password}
                   name="password"
+                  id="password"
                   onChange={(e) => handleLoginObj("password", e.target.value)}
                   
                   className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 pl-2 pr-8 py-3 outline-none"
@@ -174,7 +174,7 @@ const Login = () => {
               <button
                 type="submit"
                 className="w-full shadow-xl py-2.5 px-4 mt-12 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-                disabled={()=>validateLoginForm()}
+                // disabled={()=>validateLoginForm()}
               >
                 Sign in
               </button>

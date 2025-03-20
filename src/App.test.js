@@ -1,12 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from './store'; // Import your store
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
-import { GoogleOAuthProvider } from '@react-oauth/google'; // Import GoogleOAuthProvider
+import { store } from './store'; 
+import { BrowserRouter } from 'react-router-dom'; 
+import { GoogleOAuthProvider } from '@react-oauth/google'; 
 import App from './App';
 
-// Ensure the GoogleOAuthProvider is included in the test for Google OAuth components
 test('renders learn react link', () => {
   render(
     <Provider store={store}>
@@ -18,6 +17,5 @@ test('renders learn react link', () => {
     </Provider>
   );
 
-  // Your test assertions go here
-  expect(screen.getByText(/learn react/i)).toBeInTheDocument();
+  expect(screen.getByText(/Login with Upstox/i)).toBeInTheDocument();
 });

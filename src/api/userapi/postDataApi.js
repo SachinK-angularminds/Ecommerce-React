@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
 const postsPerPage = 10;
+
 export const postDataApi = createApi({
   reducerPath: "postDataApi",
   baseQuery: fetchBaseQuery({
