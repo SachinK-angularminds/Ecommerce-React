@@ -46,6 +46,13 @@ jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
 }));
 
+const LoginComponent=()=>{
+ return(render(
+    <GoogleOAuthProvider clientId="913971445307-2j2t8nnv3b0dev03osja3mnltlknn3nm.apps.googleusercontent.com">
+        <Login />
+    </GoogleOAuthProvider>
+));
+}
 
 describe("Login Component", () => {
   beforeEach(() => {
@@ -61,17 +68,20 @@ const useSelectorMock = reactRedux.useSelector;
 const useDispatchMock = reactRedux.useDispatch;
 
   test("should render login form", () => {
-    render(
-        <GoogleOAuthProvider clientId="913971445307-2j2t8nnv3b0dev03osja3mnltlknn3nm.apps.googleusercontent.com">
-            <Login />
-        </GoogleOAuthProvider>
-    );
+    LoginComponent()
 
     expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
 
-  
+  test('renders the login form', () => {
+    LoginComponent()
+
+    const submitButton = screen.getByText(/Sign in/i);
+    fireEvent.click(submitButton);
+    const errorMessage = screen.getByText(/Enter Valid Mail Address./i);
+    console.log("error",errorMessage)
+  });
 
   // test("should call navigate on successful google login", () => {
   //   render(

@@ -83,9 +83,10 @@ const Login = () => {
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("--->",loginObj)
-    const {email,password}=loginObj
-    const loginResponse=await postApi("/api/v1/auth/login",{email,password})
+    if(!validateLoginForm()){
+      const {email,password}=loginObj
+      const loginResponse=await postApi("/api/v1/auth/login",{email,password})
+    }  
     
   };
   return (
@@ -101,7 +102,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
               <div className="mb-12">
                 <h3 className="text-gray-800 text-3xl font-extrabold">
-                  Sign in
+                  Signed in
                 </h3>
                 <p className="text-sm mt-4 text-gray-800">
                   Don't have an account?{" "}
@@ -174,7 +175,7 @@ const Login = () => {
               <button
                 type="submit"
                 className="w-full shadow-xl py-2.5 px-4 mt-12 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-                // disabled={()=>validateLoginForm()}
+                disabled={()=>validateLoginForm()}
               >
                 Sign in
               </button>
