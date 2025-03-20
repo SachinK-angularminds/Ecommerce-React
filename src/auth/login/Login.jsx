@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthData } from "../../redux/authSlice"; 
 import { GoogleLogin } from "@react-oauth/google"; 
@@ -83,12 +83,14 @@ const Login = () => {
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log("data")
     if(!validateLoginForm()){
       const {email,password}=loginObj
       const loginResponse=await postApi("/api/v1/auth/login",{email,password})
     }  
     
   };
+  const isButtonDisabled = useMemo(() => validateLoginForm(), [errors?.emailStatus, errors?.passwordStatus]);
   return (
     <div className="login-page">
       {/* Upstox Login Button */}
@@ -174,8 +176,8 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full shadow-xl py-2.5 px-4 mt-12 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-                disabled={()=>validateLoginForm()}
+                className="w-full shadow-xl cursor-pointer py-2.5 px-4 mt-12 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                disabled={isButtonDisabled}
               >
                 Sign in
               </button>

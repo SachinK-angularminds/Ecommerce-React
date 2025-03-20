@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, useNavigate } from 'react-router-dom';
@@ -74,13 +74,61 @@ const useDispatchMock = reactRedux.useDispatch;
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
 
-  test('renders the login form', () => {
+  test('validation for email if entered wrong data', () => {
+    //rendering login component
     LoginComponent()
+
+    //getting data and clicking the submit button
+    const emailInput=screen.getByLabelText(/Email/i)
+    fireEvent.change(emailInput, { target: { value: "test@example" } })
 
     const submitButton = screen.getByText(/Sign in/i);
     fireEvent.click(submitButton);
+
     const errorMessage = screen.getByText(/Enter Valid Mail Address./i);
-    console.log("error",errorMessage)
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test('validation for password if entered wrong data', () => {
+    //rendering login component
+    LoginComponent()
+
+    //getting data and clicking the submit button
+    const passwordInput=screen.getByLabelText(/password/i)
+    fireEvent.change(passwordInput, { target: { value: "sdfse" } })
+
+    const submitButton = screen.getByText(/Sign in/i);
+    fireEvent.click(submitButton);
+
+    const errorMessage = screen.getByText(/Enter Valid Password./i);
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test('inserting valid data and submitting the form', async() => {
+    const mockLogin = jest.fn();
+    
+    //rendering login component
+    render(
+      <GoogleOAuthProvider clientId="913971445307-2j2t8nnv3b0dev03osja3mnltlknn3nm.apps.googleusercontent.com">
+          <Login submit = {mockLogin} />
+      </GoogleOAuthProvider>
+  )
+    //getting data and clicking the submit button
+    const emailInput=screen.getByLabelText(/Email/i)
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } })
+    const passwordInput=screen.getByLabelText(/password/i)
+    fireEvent.change(passwordInput, { target: { value: "sskS@123" } })
+
+    const submitButton = screen.getByText(/Sign in/i);
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(handleSubmitMock).toHaveBeenCalledTimes(1);
+      expect(handleSubmitMock).toHaveBeenCalledWith({
+        email: 'test@example.com',
+        password: 'validPassword123',
+      });
+    });
   });
 
   // test("should call navigate on successful google login", () => {
